@@ -4,34 +4,39 @@ import { CheckCircle2, Circle, ArrowRight } from 'lucide-react';
 const Learning = () => {
   const learningPath = [
     {
-      title: 'Mastering JavaScript Fundamentals',
+      title: 'JavaScript Fundamentals',
       status: 'completed',
-      description: 'Deep dive into ES6+, async/await, and advanced patterns',
+      description: 'Mastered ES6+, async/await, and advanced JavaScript patterns',
     },
     {
       title: 'React & Modern Frontend',
       status: 'completed',
-      description: 'Hooks, state management, and component architecture',
+      description: 'Built scalable applications with React hooks and state management',
     },
     {
-      title: 'Next.js & SSR',
+      title: 'Next.js & Full-Stack Development',
       status: 'in-progress',
-      description: 'Server-side rendering, API routes, and performance optimization',
+      description: 'Server-side rendering, API routes, and building production-ready apps',
     },
     {
-      title: 'DevOps & CI/CD',
+      title: 'DevOps & CI/CD Mastery',
       status: 'in-progress',
-      description: 'Docker, GitHub Actions, and deployment automation',
+      description: 'GitLab CI/CD, Docker, automation, and deployment pipelines',
     },
     {
-      title: 'Ethical Hacking & CTFs',
+      title: 'Ethical Hacking & Pentesting',
       status: 'in-progress',
-      description: 'Advanced penetration testing and security research',
+      description: 'Advanced penetration testing, CTF challenges, and vulnerability research',
     },
     {
-      title: 'AI-Driven Cybersecurity Tools',
+      title: 'AI + Cybersecurity Integration',
+      status: 'in-progress',
+      description: 'Combining AI with security: ML-based threat detection and SAST tools',
+    },
+    {
+      title: 'Building Scalable IoT & Web Systems',
       status: 'planned',
-      description: 'Building ML models for threat detection and analysis',
+      description: 'Architecting and deploying large-scale embedded and cloud solutions',
     },
   ];
 

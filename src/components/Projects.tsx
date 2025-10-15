@@ -5,33 +5,41 @@ import { ExternalLink, Github } from 'lucide-react';
 const Projects = () => {
   const projects = [
     {
+      title: 'DefenSys',
+      description:
+        'A cutting-edge application security platform that integrates static application security testing (SAST) with AI-powered vulnerability detection. Provides actionable security insights directly in the development lifecycle.',
+      tags: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'AI', 'Cybersecurity'],
+      github: 'https://github.com',
+      demo: '',
+    },
+    {
       title: 'CTF for Wireless & IoT Security Platform',
       description:
-        'A gamified learning platform with Docker labs for wireless and IoT hacking challenges. Features real-world scenarios for security education.',
+        'A gamified cybersecurity training platform simulating Wi-Fi and IoT vulnerabilities. Includes Docker-based challenges for WPA2 cracking, BLE sniffing, and firmware analysis with automatic scoring.',
       tags: ['Docker', 'Cybersecurity', 'IoT', 'Python', 'Linux'],
+      github: 'https://github.com',
+      demo: '',
+    },
+    {
+      title: 'Hugging Face for Cybersecurity',
+      description:
+        'A sandboxed web platform allowing users to upload, explore, and execute cybersecurity tools, datasets, and labs safely using Docker/KVM virtualization.',
+      tags: ['Docker', 'KVM', 'Python', 'Security', 'Sandboxing'],
       github: 'https://github.com',
       demo: '',
     },
     {
       title: 'Expense Tracker App',
       description:
-        'Full-featured smart expense tracker with authentication, interactive dashboard, analytics, and budget management capabilities.',
+        'A smart financial management app with secure login, dashboard analytics, budgeting, and notifications for tracking expenses and managing budgets.',
       tags: ['React', 'Node.js', 'PostgreSQL', 'TailwindCSS', 'JWT'],
-      github: 'https://github.com',
-      demo: '',
-    },
-    {
-      title: 'Event ToolBox',
-      description:
-        'Full-stack event management platform built during IEEE internship. Streamlines event planning, registration, and participant management.',
-      tags: ['React', 'NestJS', 'PostgreSQL', 'TypeScript', 'REST API'],
       github: 'https://github.com',
       demo: '',
     },
     {
       title: 'To-Do List Web App',
       description:
-        'A lightweight productivity tool built with Flask and PostgreSQL. Features task prioritization, categories, and deadline tracking.',
+        'Lightweight Flask-based task manager with PostgreSQL backend. Features task prioritization, categories, and deadline tracking.',
       tags: ['Flask', 'Python', 'PostgreSQL', 'HTML/CSS', 'JavaScript'],
       github: 'https://github.com',
       demo: '',
