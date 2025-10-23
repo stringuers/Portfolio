@@ -110,10 +110,10 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
                   <a
-                    href="mailto:contact@example.com"
+                    href="mailto:kilenimoemen2004@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    contact@example.com
+                    kilenimoemen2004@gmail.com
                   </a>
                 </div>
               </div>
@@ -127,12 +127,12 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold mb-1">GitHub</h3>
                   <a
-                    href="https://github.com"
+                    href="https://github.com/stringuers"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    github.com/abdelmoemen
+                    github.com/stringuers
                   </a>
                 </div>
               </div>
@@ -146,12 +146,12 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold mb-1">LinkedIn</h3>
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/abdelmoemen-kilani-030756295/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    linkedin.com/in/abdelmoemen-kilani
+                    linkedin.com/in/abdelmoemen-kilani-030756295
                   </a>
                 </div>
               </div>

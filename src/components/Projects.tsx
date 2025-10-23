@@ -9,7 +9,23 @@ const Projects = () => {
       description:
         'A cutting-edge application security platform that integrates static application security testing (SAST) with AI-powered vulnerability detection. Provides actionable security insights directly in the development lifecycle.',
       tags: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'AI', 'Cybersecurity'],
-      github: 'https://github.com',
+      github: 'https://github.com/stringuers/DefenSys',
+      demo: '',
+    },
+    {
+      title:'solar-solar-swarm-intelligence',
+      description:
+      'A multi-agent reinforcement learning platform for optimizing community-scale solar energy usage, forecasting, and peer-to-peer energy sharing',
+      tags: ['FastAPI', 'Python', 'Docker', 'React+vite', 'TailwindCSS', 'IoT'],
+      github: 'https://github.com/stringuers/solar-swarm-intelligence',
+      demo: '',
+    },
+    {
+      title: 'CTF Platform to host CTFs',
+      description:
+        'A gamified cybersecurity platform for hosting CTFs with Docker-based challenges and automatic scoring .',
+      tags: ['Docker', 'Cybersecurity', 'IoT', 'Python', 'Linux'],
+      github: 'https://github.com/stringuers/CTF-Platform',
       demo: '',
     },
     {
@@ -17,7 +33,7 @@ const Projects = () => {
       description:
         'A gamified cybersecurity training platform simulating Wi-Fi and IoT vulnerabilities. Includes Docker-based challenges for WPA2 cracking, BLE sniffing, and firmware analysis with automatic scoring.',
       tags: ['Docker', 'Cybersecurity', 'IoT', 'Python', 'Linux'],
-      github: 'https://github.com',
+      github: 'https://github.com/stringuers/Wireless_ctf',
       demo: '',
     },
     {
@@ -33,7 +49,7 @@ const Projects = () => {
       description:
         'A smart financial management app with secure login, dashboard analytics, budgeting, and notifications for tracking expenses and managing budgets.',
       tags: ['React', 'Node.js', 'PostgreSQL', 'TailwindCSS', 'JWT'],
-      github: 'https://github.com',
+      github: 'https://github.com/stringuers/ExpenseTracker',
       demo: '',
     },
     {
@@ -41,7 +57,7 @@ const Projects = () => {
       description:
         'Lightweight Flask-based task manager with PostgreSQL backend. Features task prioritization, categories, and deadline tracking.',
       tags: ['Flask', 'Python', 'PostgreSQL', 'HTML/CSS', 'JavaScript'],
-      github: 'https://github.com',
+      github: 'https://github.com/stringuers/todo',
       demo: '',
     },
   ];
