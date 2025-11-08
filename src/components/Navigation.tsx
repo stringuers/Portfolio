@@ -41,7 +41,7 @@ const Navigation = () => {
     { label: 'Skills', id: 'skills', type: 'scroll' },
     { label: 'Projects', id: 'projects', type: 'scroll' },
     { label: 'Experience', id: 'experience', type: 'scroll' },
-    { label: 'Events', id: '/events', type: 'link' },
+    { label: 'Events', id: 'events', type: 'scroll' },
     { label: 'Contact', id: 'contact', type: 'scroll' },
   ];
 

@@ -8,47 +8,47 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Modern Dark Theme - Deep Slate with Vibrant Accents */
-    --background: 222 47% 7%;
-    --foreground: 210 40% 98%;
+    /* Cool Luxury Theme - Modern Tech Premium */
+    --background: 220 18% 7%;
+    --foreground: 210 20% 98%;
 
-    --card: 222 40% 10%;
-    --card-foreground: 210 40% 98%;
+    --card: 218 20% 10%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 222 40% 10%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 218 20% 10%;
+    --popover-foreground: 210 20% 98%;
 
-    /* Vibrant Cyan Primary - Energetic & Professional */
-    --primary: 189 94% 55%;
-    --primary-foreground: 222 47% 7%;
+    /* Electric Blue Primary - Modern & Premium */
+    --primary: 200 100% 60%;
+    --primary-foreground: 220 18% 7%;
 
-    /* Electric Coral Secondary - Warm Contrast */
-    --secondary: 11 90% 65%;
-    --secondary-foreground: 222 47% 7%;
+    /* Bright Cyan Secondary - Tech Sophistication */
+    --secondary: 180 95% 55%;
+    --secondary-foreground: 220 18% 7%;
 
-    --muted: 222 30% 18%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 215 15% 70%;
 
-    /* Bright Purple Accent - Memorable Highlights */
-    --accent: 271 91% 65%;
-    --accent-foreground: 222 47% 7%;
+    /* Silver Accent - Refined Elegance */
+    --accent: 210 20% 75%;
+    --accent-foreground: 220 18% 7%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 222 25% 20%;
-    --input: 222 25% 20%;
-    --ring: 189 94% 55%;
+    --border: 218 18% 18%;
+    --input: 218 18% 18%;
+    --ring: 200 100% 60%;
 
     --radius: 0.75rem;
 
-    /* Multi-Color Gradients - Eye-Catching */
-    --gradient-primary: linear-gradient(135deg, hsl(189 94% 55%), hsl(271 91% 65%), hsl(11 90% 65%));
-    --gradient-card: linear-gradient(180deg, hsl(222 40% 10%), hsl(222 40% 8%));
-    --gradient-accent: linear-gradient(90deg, hsl(189 94% 55%), hsl(271 91% 65%));
-    --glow-primary: 0 0 35px hsl(189 94% 55% / 0.4);
-    --glow-secondary: 0 0 35px hsl(11 90% 65% / 0.35);
-    --glow-accent: 0 0 35px hsl(271 91% 65% / 0.35);
+    /* Cool Luxury Gradients - Premium Tech Feel */
+    --gradient-primary: linear-gradient(135deg, hsl(200 100% 60%), hsl(180 95% 55%), hsl(190 100% 58%));
+    --gradient-card: linear-gradient(180deg, hsl(218 20% 10%), hsl(220 20% 8%));
+    --gradient-accent: linear-gradient(90deg, hsl(200 100% 60%), hsl(210 20% 75%));
+    --glow-primary: 0 0 45px hsl(200 100% 60% / 0.4);
+    --glow-secondary: 0 0 40px hsl(180 95% 55% / 0.35);
+    --glow-accent: 0 0 35px hsl(210 20% 75% / 0.3);
   }
 }
 

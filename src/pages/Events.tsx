@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, MapPin, Trophy, Users } from 'lucide-react';
@@ -16,7 +14,7 @@ interface Event {
   images: string[];
 }
 
-const Events = () => {
+const EventsSection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const events: Event[] = [
@@ -77,7 +75,7 @@ const Events = () => {
     },
     {
       id: 4,
-      title: 'CyberBunders hackathon',
+      title: 'CyberBenders hackathon',
       date: 'December 2024',
       location: 'EPI Sousse, Tunisia',
       type: 'hackathon',
@@ -141,27 +139,20 @@ const Events = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <Navigation />
-
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center space-y-4 animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-primary">
-              Events & Experiences
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Hackathons, conferences, and networking events that shaped my journey
-            </p>
-          </div>
+    <section id="events" className="py-20 px-4">
+      <div className="container mx-auto max-w-6xl">
+        {/* Section Header */}
+        <div className="text-center space-y-4 mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-primary">
+            Events & Experiences
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Hackathons, conferences, and networking events that shaped my journey
+          </p>
         </div>
-      </section>
 
-      {/* Events Grid */}
-      <section className="py-12 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="space-y-8">
+        {/* Events Grid */}
+        <div className="space-y-8">
             {events.map((event, index) => (
               <Card
                 key={event.id}
@@ -238,9 +229,8 @@ const Events = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
         </div>
-      </section>
+      </div>
 
       {/* Image Lightbox */}
       {selectedImage && (
@@ -272,10 +262,8 @@ const Events = () => {
           </div>
         </div>
       )}
-
-      <Footer />
-    </div>
+    </section>
   );
 };
 
-export default Events;
+export default EventsSection;
