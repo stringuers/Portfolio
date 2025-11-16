@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
-import heroImage from '@/assets/hero-bg.jpg';
+import CVDropdown from '@/components/CVDropdown';
+import SecurityMesh from '@/components/ui/SecurityMesh';
 
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
@@ -47,23 +48,21 @@ const Hero = () => {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(rgba(18, 24, 38, 0.85), rgba(18, 24, 38, 0.85)), url(${heroImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
     >
+      {/* security mesh accent - subtle, interactive, and performance-conscious */}
+      <div className="absolute inset-0 -z-10">
+        <SecurityMesh />
+      </div>
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Hi, I'm <span className="text-primary [text-shadow:_0_0_10px_rgba(59,130,246,0.3)]">Abdelmoemen Kilani</span>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            Hi, I'm <span className="text-primary">Abdelmoemen Kilani</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-            Computer Engineering & IoT Student | Passionate about{' '}
-            <span className="text-secondary font-semibold">Cybersecurity</span>,{' '}
-            <span className="text-secondary font-semibold">AI</span>, and{' '}
-            <span className="text-secondary font-semibold">Full-Stack Development</span>
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl mx-auto">
+            Computer Engineering & IoT Student. I design secure systems and build
+            robust full-stack applications that scale.
+            <span className="block mt-2 text-secondary font-medium">Cybersecurity · AI · Full-Stack</span>
           </p>
 
           <div className="h-12 mb-8">
@@ -79,15 +78,16 @@ const Hero = () => {
               size="lg"
               onClick={() => scrollToSection('projects')}
             >
-              View My Projects
+              View Projects
             </Button>
             <Button
               variant="outline-glow"
               size="lg"
               onClick={() => scrollToSection('contact')}
             >
-              Contact Me
+              Contact
             </Button>
+            <CVDropdown enUrl="/cv/cv-en.pdf" frUrl="/cv/cv-fr.pdf" />
           </div>
 
           <div className="flex gap-6 justify-center">

@@ -8,47 +8,47 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Cool Luxury Theme - Modern Tech Premium */
-    --background: 220 18% 7%;
-    --foreground: 210 20% 98%;
+    /* Cybersecurity Dark - Navy + Electric Cyan Palette */
+    --background: 220 50% 8%; /* #0a0f1e */
+    --background-2: 217 42% 14%; /* secondary bg #151f35 */
+    --foreground: 200 100% 97%; /* #f0f9ff */
 
-    --card: 218 20% 10%;
-    --card-foreground: 210 20% 98%;
+    --card: 217 42% 12%;
+    --card-foreground: 200 100% 97%;
 
-    --popover: 218 20% 10%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 217 42% 12%;
+    --popover-foreground: 200 100% 97%;
 
-    /* Electric Blue Primary - Modern & Premium */
-    --primary: 200 100% 60%;
-    --primary-foreground: 220 18% 7%;
+    /* Brand accents */
+    --primary: 188 100% 50%; /* electric cyan #00d9ff */
+    --primary-foreground: 220 50% 8%;
 
-    /* Bright Cyan Secondary - Tech Sophistication */
-    --secondary: 180 95% 55%;
-    --secondary-foreground: 220 18% 7%;
+    --secondary: 195 91% 36%; /* deep cyan #0891b2 */
+    --secondary-foreground: 220 50% 8%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 215 15% 70%;
+    --muted: 217 20% 12%;
+    --muted-foreground: 215 12% 70%;
 
-    /* Silver Accent - Refined Elegance */
-    --accent: 210 20% 75%;
-    --accent-foreground: 220 18% 7%;
+    --accent: 188 100% 50%;
+    --accent-foreground: 220 50% 8%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 200 100% 97%;
 
-    --border: 218 18% 18%;
-    --input: 218 18% 18%;
-    --ring: 200 100% 60%;
+    --border: 217 18% 16%;
+    --input: 217 18% 16%;
+    --ring: 188 100% 50%;
+
+    --text-secondary: 215 12% 58%; /* #64748b */
 
     --radius: 0.75rem;
 
-    /* Cool Luxury Gradients - Premium Tech Feel */
-    --gradient-primary: linear-gradient(135deg, hsl(200 100% 60%), hsl(180 95% 55%), hsl(190 100% 58%));
-    --gradient-card: linear-gradient(180deg, hsl(218 20% 10%), hsl(220 20% 8%));
-    --gradient-accent: linear-gradient(90deg, hsl(200 100% 60%), hsl(210 20% 75%));
-    --glow-primary: 0 0 45px hsl(200 100% 60% / 0.4);
-    --glow-secondary: 0 0 40px hsl(180 95% 55% / 0.35);
-    --glow-accent: 0 0 35px hsl(210 20% 75% / 0.3);
+    /* Gradients & glows */
+    --gradient-primary: linear-gradient(135deg, hsl(188 100% 50%), hsl(195 91% 36%));
+    --gradient-card: linear-gradient(180deg, hsl(217 42% 12%), hsl(220 50% 8%));
+    --gradient-accent: linear-gradient(90deg, hsl(188 100% 50%), hsl(195 91% 36%));
+    --glow-primary: 0 0 45px hsl(188 100% 50% / 0.32);
+    --glow-secondary: 0 0 36px hsl(195 91% 36% / 0.28);
   }
 }
 
@@ -60,4 +60,47 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Subtle site-wide animated background */
+@layer utilities {
+  .bg-aurora {
+    position: relative;
+    isolation: isolate;
+    background-color: hsl(var(--background));
+  }
+  .bg-aurora::before {
+    content: "";
+    position: fixed;
+    inset: -20vmax;
+    background:
+      radial-gradient(40% 60% at 8% 12%, hsl(var(--primary) / .14), transparent 60%),
+      radial-gradient(35% 55% at 92% 18%, hsl(var(--secondary) / .12), transparent 60%),
+      radial-gradient(45% 60% at 50% 100%, hsl(var(--accent) / .10), transparent 65%);
+    filter: blur(18px);
+    will-change: transform, opacity;
+    animation: aurora-shift 22s ease-in-out infinite alternate;
+    z-index: -2;
+  }
+  .bg-aurora::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: .25;
+    mix-blend-mode: overlay;
+    z-index: -1;
+  }
+}
+
+@keyframes aurora-shift {
+  0% { transform: translate3d(-2%, 0, 0) scale(1.02); }
+  100% { transform: translate3d(2%, -1%, 0) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-aurora::before { animation: none; }
 }
