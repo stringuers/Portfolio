@@ -56,7 +56,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Hi, I'm <span className="text-primary animate-glow">Abdelmoemen Kilani</span> 
+            Hi, I'm <span className="text-primary [text-shadow:_0_0_10px_rgba(59,130,246,0.3)]">Abdelmoemen Kilani</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8">
