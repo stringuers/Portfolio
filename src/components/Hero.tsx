@@ -47,7 +47,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
     >
       {/* security mesh accent - subtle, interactive, and performance-conscious */}
       <div className="absolute inset-0 -z-10">
