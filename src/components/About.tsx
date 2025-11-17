@@ -3,7 +3,7 @@ import { User, Award, Heart } from 'lucide-react';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-background">
+    <section id="about" className="py-20 bg-background scroll-mt-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 animate-slide-up">
           About <span className="text-primary">Me</span>
