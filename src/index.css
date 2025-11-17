@@ -58,9 +58,11 @@ All colors MUST be HSL.
   }
 
   html,
-  body {
+  body,
+  #root {
     height: auto;
     width: 100%;
+    display: block;
   }
 
   body {
