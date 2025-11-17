@@ -22,6 +22,20 @@ const EventsSection = () => {
 
   const events: Event[] = [
     {
+      id: 101,
+      title: 'IEEEXtreme 19.0',
+      date: ' 2025',
+      location: 'Global (Online)',
+      type: 'hackathon',
+      description: '24 hours of non-stop competitive programming at IEEEXtreme! Solving algorithms, debugging at 3 AM, and pushing our limits. Two years of intense coding challenges!',
+      achievement: 'Participant and completed all challenges',
+      images: [
+        'src/pages/images/extreeme.jpg',
+        
+      ],
+    },
+
+    {
       id: 1,
       title: 'IASTAM 5.0',
       date: 'October 2025',
@@ -30,9 +44,9 @@ const EventsSection = () => {
       description: 'I won first place in the Tech Challenge at IASTAM 5 (2025), leading event for industrial technology. My project DefenSys was recognized for innovative AI-powered application security.',
       achievement: 'First Place in Tech Challenge',
       images: [
-        './images/iastam1.jpeg',
-        './images/iastam2.jpeg',
-        './images/iastam3.jpeg',
+        'src/pages/images/iastam1.jpeg',
+        'src/pages/images/iastam2.jpeg',
+        'src/pages/images/iastam3.jpeg',
       ],
     },
     {
@@ -44,9 +58,8 @@ const EventsSection = () => {
       description: 'IAC:IEEE IAS 60TH Anniversary, a powerful conversation exploring industrial journey, innovations driving change, and the road ahead.',
       achievement: 'Celebration of innovation, teamwork and collaboration',
       images: [
-        'https://media.licdn.com/dms/image/v2/D4E22AQHj5UZE-H0QHw/feedshare-shrink_800/B4EZYwraNpHkAg-/0/1744573517837?e=1762992000&v=beta&t=IrOrNhGov0av5hUIrvKmmEmvpeMgweAl9iMmTK6d5P8',
-        'https://media.licdn.com/dms/image/v2/D4E22AQFqrq_lNHvixQ/feedshare-shrink_800/B4EZZAW59UHYAg-/0/1744836542474?e=1762992000&v=beta&t=9LEul4puHyPW5mpJrAqRqpgfvPi6R3eQNRbzoUhDNlQ',
-        'https://media.licdn.com/dms/image/v2/D4E22AQH248gGQ9atkQ/feedshare-shrink_2048_1536/B4EZY7FKMvHEAw-/0/1744747972607?e=1762992000&v=beta&t=AnB7R8GQ3C-7sBqxA3UTLo8kHwrfNtrhFcfv2YGOp_k',
+        'src/pages/images/iac1.jpeg',
+        'src/pages/images/iac2.jpg',
       ],
     },
     {
@@ -58,9 +71,9 @@ const EventsSection = () => {
       description: 'Raksha Pentest is an intense 26-hour cybersecurity hackathon focused on penetration testing and ethical hacking. Participants tackle real-world security challenges and defend systems.',
       achievement: '4th Place in Pentest',
       images: [
-        'https://media.licdn.com/dms/image/v2/D4E22AQHCkzedUtf35A/feedshare-shrink_2048_1536/B4EZcWimGMHkAw-/0/1748429859640?e=1762992000&v=beta&t=jPbFp9233aHpw8QxINgxVYy6_fKMxrbKa9J43ecIZ5Y',
-        'https://media.licdn.com/dms/image/v2/D4E22AQE8XmComDIFGQ/feedshare-shrink_2048_1536/B4EZcWimHJHQAs-/0/1748429860522?e=1762992000&v=beta&t=AFuZYAHyRnTAMpyvZhSR-ihAdph_Z7eeBU7yotqE27U',
-        'https://media.licdn.com/dms/image/v2/D4E22AQFkZ2SdwwU39g/feedshare-shrink_2048_1536/B4EZcWimG_H0As-/0/1748429860335?e=1762992000&v=beta&t=-nuUGfMU-TmvniNfe3q22IhzAYpoi7wFMTPlXVhX6TA',
+        'src/pages/images/raksha1.jpeg',
+        'src/pages/images/raksha2.jpeg',
+        'src/pages/images/raksha3.jpeg',
       ],
     },
     {
@@ -72,9 +85,9 @@ const EventsSection = () => {
       description: 'Secured 3rd place in RedRoom Hackathon, a challenging cybersecurity competition focused on CTFs and penetration testing, demonstrating practical offensive and defensive skills.',
       achievement: '3rd Place in CTF, ARG, Pentest',
       images: [
-        'https://media.licdn.com/dms/image/v2/D4E22AQFHGt51N_7pkg/feedshare-shrink_800/B4EZYedsX_G0Ag-/0/1744267824684?e=1762992000&v=beta&t=nztMaeYa-xnkaxH4A6CoRbs7tGTjYcgu4AWeopLsJzw',
-        'https://media.licdn.com/dms/image/v2/D4E22AQFcVxzXR2lvdQ/feedshare-shrink_800/B4EZYedsYtHUAg-/0/1744267824638?e=1762992000&v=beta&t=RaEW3p-qePwRINivYGJJSEu8mSqFWsryzq6swJDAC3E',
-        'https://media.licdn.com/dms/image/v2/D4E22AQG5eGeBM7v8vA/feedshare-shrink_2048_1536/B4EZYedsZTHkAs-/0/1744267827843?e=1762992000&v=beta&t=zuGL4mj-6aKFExLr_eOOoL_JJtUqXtUQyhQQKcW6qPo',
+        'src/pages/images/redroom1.jpeg',
+        'src/pages/images/redroom2.jpeg',
+        'src/pages/images/redroom3.jpeg', 
       ],
     },
     {
@@ -86,35 +99,10 @@ const EventsSection = () => {
       description: 'Secured 4th place with team in Cyberbenders hackathon, a challenging cybersecurity competition focused on CTFs and AI challenges.',
       achievement: '4th Place in CTF, AI',
       images: [
-        'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
-        'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
       ],
     },
-    {
-      id: 5,
-      title: 'React Summit',
-      date: 'June 2024',
-      location: 'Amsterdam, Netherlands',
-      type: 'conference',
-      description: 'International conference focused on React ecosystem, modern web development practices, and future trends.',
-      images: [
-        'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&q=80',
-        'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-        'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80',
-      ],
-    },
-    {
-      id: 6,
-      title: 'Tech Networking Night',
-      date: 'May 2024',
-      location: 'Seattle, WA',
-      type: 'social',
-      description: 'Evening networking event connecting tech professionals, entrepreneurs, and innovators in the Pacific Northwest.',
-      images: [
-        'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&q=80',
-        'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&q=80',
-      ],
-    },
+    
+    
   ];
 
   const getTypeColor = (type: string) => {
