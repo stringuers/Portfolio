@@ -19,21 +19,26 @@ const Navigation = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
-    // If not on home page, navigate to home first
-    if (location.pathname !== '/') {
-      navigate('/');
+    // If not on home page, navigate to home first.
+    // Use Vite's BASE_URL so this works on GitHub Pages (/Portfolio/).
+    const base = (import.meta as any).env?.BASE_URL || '/';
+    const isOnHome = location.pathname === '/' || location.pathname === base;
+
+    if (!isOnHome) {
+      navigate(base);
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 150);
     } else {
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
+
     setIsMobileMenuOpen(false);
   };
 
