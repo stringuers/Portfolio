@@ -30,8 +30,9 @@ const EventsSection = () => {
       description: 'I won first place in the Tech Challenge at IASTAM 5 (2025), leading event for industrial technology. My project DefenSys was recognized for innovative AI-powered application security.',
       achievement: 'First Place in Tech Challenge',
       images: [
-        'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
-        'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80',
+        './images/iastam1.jpeg',
+        './images/iastam2.jpeg',
+        './images/iastam3.jpeg',
       ],
     },
     {
