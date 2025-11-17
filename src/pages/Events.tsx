@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import Navigation from '@/components/Navigation';
+import DynamicBackground from '@/components/ui/DynamicBackground';
+import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, MapPin, Trophy, Users } from 'lucide-react';
@@ -22,10 +25,10 @@ const EventsSection = () => {
       id: 1,
       title: 'IASTAM 5.0',
       date: 'October 2025',
-      location: 'Hammamet , Tunisia',
+      location: 'Hammamet, Tunisia',
       type: 'conference',
-      description: 'I won first place in the Tech Challenge at IASTAM 5 (2025), Tunisia’s leading event for industrial technology. My project DefenSys was recognized for its innovative AI-powered application security solution.',
-      achievement: ' First Place in Tech Challenge',
+      description: 'I won first place in the Tech Challenge at IASTAM 5 (2025), leading event for industrial technology. My project DefenSys was recognized for innovative AI-powered application security.',
+      achievement: 'First Place in Tech Challenge',
       images: [
         'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
         'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80',
@@ -35,10 +38,10 @@ const EventsSection = () => {
       id: 8,
       title: 'IAC:IEEE IAS 60TH Anniversary',
       date: 'avril 2025',
-      location: 'Tunis , Tunisia',
+      location: 'Tunis, Tunisia',
       type: 'conference',
-      description: 'IAC:IEEE IAS 60TH Anniversary, a powerful conversation exploring the journey of Tunisia’s industry, the innovations driving change, and the road ahead.',
-      achievement: 'A celebration of innovation,teamwork and collaboration',
+      description: 'IAC:IEEE IAS 60TH Anniversary, a powerful conversation exploring industrial journey, innovations driving change, and the road ahead.',
+      achievement: 'Celebration of innovation, teamwork and collaboration',
       images: [
         'https://media.licdn.com/dms/image/v2/D4E22AQHj5UZE-H0QHw/feedshare-shrink_800/B4EZYwraNpHkAg-/0/1744573517837?e=1762992000&v=beta&t=IrOrNhGov0av5hUIrvKmmEmvpeMgweAl9iMmTK6d5P8',
         'https://media.licdn.com/dms/image/v2/D4E22AQFqrq_lNHvixQ/feedshare-shrink_800/B4EZZAW59UHYAg-/0/1744836542474?e=1762992000&v=beta&t=9LEul4puHyPW5mpJrAqRqpgfvPi6R3eQNRbzoUhDNlQ',
@@ -49,9 +52,9 @@ const EventsSection = () => {
       id: 2,
       title: 'Raksha Pentest',
       date: 'Avril 2025',
-      location: 'EPI Sousse , Tunisia',
+      location: 'EPI Sousse, Tunisia',
       type: 'hackathon',
-      description: '**Raksha Pentest** is an intense **26-hour cybersecurity hackathon** focused on **penetration testing and ethical hacking**. Participants tackle real-world security challenges, exploit vulnerabilities, and defend systems, testing their skills in network, web security under competitive conditions.',
+      description: 'Raksha Pentest is an intense 26-hour cybersecurity hackathon focused on penetration testing and ethical hacking. Participants tackle real-world security challenges and defend systems.',
       achievement: '4th Place in Pentest',
       images: [
         'https://media.licdn.com/dms/image/v2/D4E22AQHCkzedUtf35A/feedshare-shrink_2048_1536/B4EZcWimGMHkAw-/0/1748429859640?e=1762992000&v=beta&t=jPbFp9233aHpw8QxINgxVYy6_fKMxrbKa9J43ecIZ5Y',
@@ -63,10 +66,10 @@ const EventsSection = () => {
       id: 3,
       title: 'RedRoom hackathon',
       date: 'Fevrier 2025',
-      location: 'ISITCOM,Sousse, Tunisia',
+      location: 'ISITCOM, Sousse, Tunisia',
       type: 'hackathon',
-      description: 'I secured with my team 3rd place in the RedRoom Hackathon, a challenging cybersecurity competition focused on CTFs, ARGs, and penetration testing, where participants solved advanced security challenges and demonstrated practical offensive and defensive skills.',
-      achievement: '3rd Place in CTF,ARG,Pentest',
+      description: 'Secured 3rd place in RedRoom Hackathon, a challenging cybersecurity competition focused on CTFs and penetration testing, demonstrating practical offensive and defensive skills.',
+      achievement: '3rd Place in CTF, ARG, Pentest',
       images: [
         'https://media.licdn.com/dms/image/v2/D4E22AQFHGt51N_7pkg/feedshare-shrink_800/B4EZYedsX_G0Ag-/0/1744267824684?e=1762992000&v=beta&t=nztMaeYa-xnkaxH4A6CoRbs7tGTjYcgu4AWeopLsJzw',
         'https://media.licdn.com/dms/image/v2/D4E22AQFcVxzXR2lvdQ/feedshare-shrink_800/B4EZYedsYtHUAg-/0/1744267824638?e=1762992000&v=beta&t=RaEW3p-qePwRINivYGJJSEu8mSqFWsryzq6swJDAC3E',
@@ -79,12 +82,11 @@ const EventsSection = () => {
       date: 'December 2024',
       location: 'EPI Sousse, Tunisia',
       type: 'hackathon',
-      description: 'I secured with my team 4th place in the Cyberbunders hackathon, a challenging cybersecurity competition focused on CTFs and AI challenges ',
+      description: 'Secured 4th place with team in Cyberbenders hackathon, a challenging cybersecurity competition focused on CTFs and AI challenges.',
       achievement: '4th Place in CTF, AI',
       images: [
         'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
         'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
-        
       ],
     },
     {
@@ -139,98 +141,105 @@ const EventsSection = () => {
   };
 
   return (
-    <section id="events" className="py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
-        <div className="text-center space-y-4 mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-primary">
-            Events & Experiences
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Hackathons, conferences, and networking events that shaped my journey
-          </p>
-        </div>
+    <div className="relative">
+      <DynamicBackground />
+      <Navigation />
+      <main className="relative z-10">
+        <section id="events" className="py-20 px-4">
+          <div className="container mx-auto max-w-6xl">
+            {/* Section Header */}
+            <div className="text-center space-y-4 mb-16 animate-fade-in">
+              <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-primary">
+                Events & Experiences
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Hackathons, conferences, and networking events that shaped my journey
+              </p>
+            </div>
 
-        {/* Events Grid */}
-        <div className="space-y-8">
-            {events.map((event, index) => (
-              <Card
-                key={event.id}
-                className="group overflow-hidden border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow-primary animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-0">
-                  <div className="grid md:grid-cols-2 gap-0">
-                    {/* Event Details */}
-                    <div className="p-6 md:p-8 flex flex-col justify-center space-y-4 bg-card">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <Badge className={`${getTypeColor(event.type)} flex items-center gap-1`}>
-                          {getTypeIcon(event.type)}
-                          <span className="capitalize">{event.type}</span>
-                        </Badge>
-                        {event.achievement && (
-                          <Badge variant="outline" className="border-secondary text-secondary">
-                            {event.achievement}
+            {/* Events Grid */}
+            <div className="space-y-8">
+              {events.map((event, index) => (
+                <Card
+                  key={event.id}
+                  className="group overflow-hidden border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow-primary animate-slide-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-0">
+                    <div className="grid md:grid-cols-2 gap-0">
+                      {/* Event Details */}
+                      <div className="p-6 md:p-8 flex flex-col justify-center space-y-4 bg-card">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Badge className={`${getTypeColor(event.type)} flex items-center gap-1`}>
+                            {getTypeIcon(event.type)}
+                            <span className="capitalize">{event.type}</span>
                           </Badge>
-                        )}
-                      </div>
-
-                      <h3 className="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
-                        {event.title}
-                      </h3>
-
-                      <div className="space-y-2 text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-primary" />
-                          <span>{event.date}</span>
+                          {event.achievement && (
+                            <Badge variant="outline" className="border-secondary text-secondary">
+                              {event.achievement}
+                            </Badge>
+                          )}
                         </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-secondary" />
-                          <span>{event.location}</span>
-                        </div>
-                      </div>
 
-                      <p className="text-foreground/80 leading-relaxed">{event.description}</p>
-                    </div>
+                        <h3 className="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
+                          {event.title}
+                        </h3>
 
-                    {/* Image Gallery */}
-                    <div className="relative">
-                      <div
-                        className={`grid gap-2 p-4 ${
-                          event.images.length === 1
-                            ? 'grid-cols-1'
-                            : event.images.length === 2
-                            ? 'grid-cols-2'
-                            : event.images.length === 3
-                            ? 'grid-cols-2 grid-rows-2'
-                            : 'grid-cols-2 grid-rows-2'
-                        }`}
-                      >
-                        {event.images.map((image, imgIndex) => (
-                          <div
-                            key={imgIndex}
-                            className={`relative overflow-hidden rounded-lg cursor-pointer group/img ${
-                              event.images.length === 3 && imgIndex === 0 ? 'row-span-2' : ''
-                            } ${event.images.length >= 4 && imgIndex === 0 ? 'col-span-2' : ''}`}
-                            onClick={() => setSelectedImage(image)}
-                          >
-                            <img
-                              src={image}
-                              alt={`${event.title} - Image ${imgIndex + 1}`}
-                              className="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-110"
-                              style={{ minHeight: event.images.length === 1 ? '100%' : '150px' }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
+                        <div className="space-y-2 text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-primary" />
+                            <span>{event.date}</span>
                           </div>
-                        ))}
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-secondary" />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+
+                        <p className="text-foreground/80 leading-relaxed">{event.description}</p>
+                      </div>
+
+                      {/* Image Gallery */}
+                      <div className="relative">
+                        <div
+                          className={`grid gap-2 p-4 ${
+                            event.images.length === 1
+                              ? 'grid-cols-1'
+                              : event.images.length === 2
+                              ? 'grid-cols-2'
+                              : event.images.length === 3
+                              ? 'grid-cols-2 grid-rows-2'
+                              : 'grid-cols-2 grid-rows-2'
+                          }`}
+                        >
+                          {event.images.map((image, imgIndex) => (
+                            <div
+                              key={imgIndex}
+                              className={`relative overflow-hidden rounded-lg cursor-pointer group/img ${
+                                event.images.length === 3 && imgIndex === 0 ? 'row-span-2' : ''
+                              } ${event.images.length >= 4 && imgIndex === 0 ? 'col-span-2' : ''}`}
+                              onClick={() => setSelectedImage(image)}
+                            >
+                              <img
+                                src={image}
+                                alt={`${event.title} - Image ${imgIndex + 1}`}
+                                className="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-110"
+                                style={{ minHeight: event.images.length === 1 ? '100%' : '150px' }}
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-        </div>
-      </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
 
       {/* Image Lightbox */}
       {selectedImage && (
@@ -262,7 +271,7 @@ const EventsSection = () => {
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 

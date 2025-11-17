@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import CVDropdown from '@/components/CVDropdown';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -81,6 +82,7 @@ const Navigation = () => {
                 </button>
               )
             )}
+            <CVDropdown />
           </div>
 
           {/* Mobile Menu Button */}
@@ -117,6 +119,9 @@ const Navigation = () => {
                 </button>
               )
             )}
+            <div className="px-4 pt-2">
+              <CVDropdown />
+            </div>
           </div>
         )}
       </div>
