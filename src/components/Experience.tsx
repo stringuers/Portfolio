@@ -62,7 +62,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-muted/30">
+    <section id="experience" className="relative z-10 py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 animate-slide-up">
           Experience & <span className="text-primary">Involvement</span>

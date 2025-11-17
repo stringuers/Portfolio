@@ -41,7 +41,7 @@ const Learning = () => {
   ];
 
   return (
-    <section id="learning" className="py-20 bg-background">
+    <section id="learning" className="relative z-10 py-20 bg-background">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-slide-up">
           Learning <span className="text-primary">Journey</span>

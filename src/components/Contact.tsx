@@ -38,7 +38,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-muted/30 scroll-mt-20">
+    <section id="contact" className="relative z-10 py-20 bg-muted/30 scroll-mt-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-slide-up">
           Get In <span className="text-primary">Touch</span>
