@@ -25,7 +25,7 @@ const About = () => {
 
             <p className="text-lg text-muted-foreground leading-relaxed">
               Outside of projects, I enjoy CTFs and community workshops where I both learn and share practical
-              security techniques.
+              security techniques!
             </p>
           </div>
 
