@@ -30,7 +30,7 @@ const EventsSection = () => {
       description: '24 hours of non-stop competitive programming at IEEEXtreme! Solving algorithms, debugging at 3 AM, and pushing our limits. Two years of intense coding challenges!',
       achievement: 'Participant and completed all challenges',
       images: [
-        'src/pages/images/extreeme.jpg',
+        'public/images/extreeme.jpg',
         
       ],
     },
@@ -44,9 +44,9 @@ const EventsSection = () => {
       description: 'I won first place in the Tech Challenge at IASTAM 5 (2025), leading event for industrial technology. My project DefenSys was recognized for innovative AI-powered application security.',
       achievement: 'First Place in Tech Challenge',
       images: [
-        'src/pages/images/iastam1.jpeg',
-        'src/pages/images/iastam2.jpeg',
-        'src/pages/images/iastam3.jpeg',
+        'public/images/iastam1.jpeg',
+        'public/images/iastam2.jpeg',
+        'public/images/iastam3.jpeg',
       ],
     },
     {
@@ -58,8 +58,8 @@ const EventsSection = () => {
       description: 'IAC:IEEE IAS 60TH Anniversary, a powerful conversation exploring industrial journey, innovations driving change, and the road ahead.',
       achievement: 'Celebration of innovation, teamwork and collaboration',
       images: [
-        'src/pages/images/iac1.jpeg',
-        'src/pages/images/iac2.jpg',
+        'public/images/iac1.jpeg',
+        'public/images/iac2.jpg',
       ],
     },
     {
@@ -71,9 +71,9 @@ const EventsSection = () => {
       description: 'Raksha Pentest is an intense 26-hour cybersecurity hackathon focused on penetration testing and ethical hacking. Participants tackle real-world security challenges and defend systems.',
       achievement: '4th Place in Pentest',
       images: [
-        'src/pages/images/raksha1.jpeg',
-        'src/pages/images/raksha2.jpeg',
-        'src/pages/images/raksha3.jpeg',
+        'public/images/raksha1.jpeg',
+        'public/images/raksha2.jpeg',
+        'public/images/raksha3.jpeg',
       ],
     },
     {
@@ -85,9 +85,9 @@ const EventsSection = () => {
       description: 'Secured 3rd place in RedRoom Hackathon, a challenging cybersecurity competition focused on CTFs and penetration testing, demonstrating practical offensive and defensive skills.',
       achievement: '3rd Place in CTF, ARG, Pentest',
       images: [
-        'src/pages/images/redroom1.jpeg',
-        'src/pages/images/redroom2.jpeg',
-        'src/pages/images/redroom3.jpeg', 
+        'public/images/redroom1.jpeg',
+        'public/images/redroom2.jpeg',
+        'public/images/redroom3.jpeg', 
       ],
     },
     {
