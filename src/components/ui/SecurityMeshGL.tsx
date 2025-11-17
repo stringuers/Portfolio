@@ -34,45 +34,57 @@ export default function SecurityMeshGL({ className = '' }: { className?: string 
       }
     `;
 
-    // fragment shader draws animated soft blobs based on time and resolution
+    // fragment shader draws a grid of moving 'bits' — lightweight matrix-like effect
+    // Supports a uniform 'u_intensity' to control overall animation intensity/speed
     const fsSource = `
       precision mediump float;
       uniform float u_time;
       uniform vec2 u_res;
+      uniform float u_intensity;
 
-      // hashed pseudo-random
-      float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453123); }
-
-      // soft circle
-      float circle(vec2 p, vec2 c, float r) {
-        float d = length((p - c) / u_res);
-        return smoothstep(r, r - 0.02, d);
-      }
+      // pseudo-random generator
+      float hash(float n) { return fract(sin(n) * 43758.5453); }
 
       void main() {
         vec2 uv = gl_FragCoord.xy;
         float t = u_time * 0.001;
 
-        // define few moving centers procedurally
-        vec2 c1 = vec2(0.5 * u_res.x + 0.4 * u_res.x * sin(t * 0.12), 0.5 * u_res.y + 0.2 * u_res.y * cos(t * 0.08));
-        vec2 c2 = vec2(0.5 * u_res.x + 0.5 * u_res.x * cos(t * 0.09 + 1.0), 0.5 * u_res.y + 0.3 * u_res.y * sin(t * 0.07 + 2.0));
-        vec2 c3 = vec2(0.5 * u_res.x + 0.35 * u_res.x * sin(t * 0.14 + 3.0), 0.5 * u_res.y + 0.25 * u_res.y * cos(t * 0.11 + 1.0));
+        // grid configuration
+        float cellSize = max(4.0, u_res.x / 140.0); // adapt to width (higher density)
+        vec2 cell = floor(uv / cellSize);
+        vec2 frac = mod(uv, cellSize) / cellSize;
 
-        float b1 = circle(uv, c1, 0.18);
-        float b2 = circle(uv, c2, 0.16);
-        float b3 = circle(uv, c3, 0.13);
+        // compute a value per cell that animates vertically like falling bits
+        float colIndex = cell.x;
+        float seed = hash(colIndex);
+        // vertical offset per column, speed scaled by intensity
+        float speed = (0.6 + 0.8 * hash(colIndex + 1.0)) * u_intensity;
+        float offset = fract(t * 0.2 * speed + seed * 10.0);
 
-        // color in electric cyan tones
-        vec3 col = vec3(0.02, 0.09, 0.12) * 0.8; // dark base
-        col += vec3(0.0, 0.85, 1.0) * (b1 * 0.6);
-        col += vec3(0.0, 0.65, 0.85) * (b2 * 0.45);
-        col += vec3(0.0, 0.45, 0.65) * (b3 * 0.35);
+        // chance for a lit bit at this cell depending on a pseudo-random sequence
+        float pattern = hash(colIndex * 12.9898 + cell.y * 78.233 + floor(t * speed));
+        float lit = step(0.88 - 0.15 * u_intensity, pattern); // intensity affects density
 
-        // subtle vignette
+        // create a vertical streak based on offset and frac.y
+        float streak = smoothstep(0.0, 0.12, abs(frac.y - offset));
+
+        // final intensity mixes lit and streak and soft edges
+        float intensity = mix(0.0, 1.0, lit * streak) * u_intensity;
+        intensity += 0.04 * smoothstep(0.0, 0.1, 1.0 - length(frac - 0.5));
+
+        // color: electric cyan glow
+        vec3 base = vec3(0.01, 0.03, 0.06);
+        vec3 col = base + vec3(0.0, 0.85, 1.0) * intensity * 0.95;
+
+        // subtle horizontal scanline effect
+        float scan = smoothstep(0.0, 0.5, sin(uv.y * 0.5) * 0.5 + 0.5);
+        col *= mix(1.0, 0.98, scan * 0.06);
+
+        // vignette to focus center
         float d = length((uv - 0.5 * u_res) / u_res);
-        col *= smoothstep(1.0, 0.4, d);
+        col *= smoothstep(1.0, 0.25, d);
 
-        gl_FragColor = vec4(col, clamp(b1 + b2 + b3, 0.0, 0.9));
+        gl_FragColor = vec4(col, clamp(intensity, 0.0, 1.0));
       }
     `;
 
@@ -109,8 +121,25 @@ export default function SecurityMeshGL({ className = '' }: { className?: string 
 
     const timeLoc = gl.getUniformLocation(prog, 'u_time');
     const resLoc = gl.getUniformLocation(prog, 'u_res');
+    const intensityLoc = gl.getUniformLocation(prog, 'u_intensity');
 
     let running = true;
+    // intensity controlled by UI: map string -> multiplier
+    const mapIntensity = (v: string | null) => (v === 'calm' ? 0.6 : v === 'intense' ? 1.6 : 1.0);
+    const intensityRef = { current: mapIntensity(typeof window !== 'undefined' ? window.localStorage.getItem('bgIntensity') : null) };
+
+    const onIntensity = (e: any) => {
+      const val = e?.detail ?? (typeof e === 'string' ? e : null);
+      intensityRef.current = mapIntensity(val);
+    };
+    // listen for custom events
+    window.addEventListener('bg-intensity-changed', onIntensity as EventListener);
+
+    // also listen to storage events (cross-tab)
+    const onStorage = (ev: StorageEvent) => {
+      if (ev.key === 'bgIntensity') onIntensity(ev.newValue);
+    };
+    window.addEventListener('storage', onStorage);
 
     const render = (t: number) => {
       if (!running) return;
@@ -119,6 +148,7 @@ export default function SecurityMeshGL({ className = '' }: { className?: string 
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform1f(timeLoc, t);
       gl.uniform2f(resLoc, canvas.width, canvas.height);
+      gl.uniform1f(intensityLoc, intensityRef.current);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
       anim = requestAnimationFrame(render);
     };
@@ -145,6 +175,8 @@ export default function SecurityMeshGL({ className = '' }: { className?: string 
       if (anim) cancelAnimationFrame(anim);
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVis);
+      window.removeEventListener('bg-intensity-changed', onIntensity as EventListener);
+      window.removeEventListener('storage', onStorage);
       try {
         gl.deleteProgram(prog);
         gl.deleteShader(vs);

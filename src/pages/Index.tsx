@@ -13,10 +13,10 @@ import DynamicBackground from '@/components/ui/DynamicBackground';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-aurora relative">
+    <div className="relative">
       <DynamicBackground />
       <Navigation />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <About />
         <InteractiveShowcase />
