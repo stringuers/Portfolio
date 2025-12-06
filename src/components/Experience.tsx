@@ -1,14 +1,14 @@
 import { Card } from '@/components/ui/card';
-import { Briefcase, Users, Trophy } from 'lucide-react';
+import { Briefcase, Users, Trophy, Calendar } from 'lucide-react';
 
 const Experience = () => {
   const experiences = [
     {
       icon: Briefcase,
-      color: 'primary',
       title: 'DevOps Developer Intern',
       organization: 'VEO Tunisie',
       period: 'Aug 2025 - Sep 2025',
+      location: 'Tunis, Tunisia',
       description:
         'Worked on DevOps pipelines using GitLab CI/CD and ABAP. Developed automation scripts for deployment and monitoring to improve system reliability and workflow integration.',
       achievements: [
@@ -19,10 +19,10 @@ const Experience = () => {
     },
     {
       icon: Briefcase,
-      color: 'secondary',
       title: 'Embedded Systems Intern',
       organization: 'BQube ITs',
       period: 'Jul 2025 - Aug 2025',
+      location: 'Tunis, Tunisia',
       description:
         'Worked on embedded C++ development and IoT-based systems. Implemented low-level firmware and communication protocols for real-time embedded solutions.',
       achievements: [
@@ -33,10 +33,10 @@ const Experience = () => {
     },
     {
       icon: Users,
-      color: 'primary',
       title: 'Treasurer',
       organization: 'IEEE IIP Student Branch',
       period: '2023 - Present',
+      location: 'Tunis, Tunisia',
       description:
         'Managing finances and organizing technical workshops. Supporting student-led innovation in AI, IoT, and security.',
       achievements: [
@@ -47,10 +47,10 @@ const Experience = () => {
     },
     {
       icon: Trophy,
-      color: 'secondary',
       title: 'Hackathon & CTF Participant',
       organization: 'Various Events',
       period: '2022 - Present',
+      location: 'Tunisia & Global',
       description:
         'Active participation in hackathons and Capture The Flag competitions focused on IoT, AI, and cybersecurity challenges.',
       achievements: [
@@ -62,60 +62,103 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="relative z-10 py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 animate-slide-up">
-          Experience & <span className="text-primary">Involvement</span>
-        </h2>
+    <section id="experience" className="relative z-10 py-32 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <div className="inline-block w-16 h-0.5 bg-accent mb-6" />
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            Experience & <span className="text-accent">Involvement</span>
+          </h2>
+          <p className="text-xl text-foreground/70 leading-relaxed">
+            My professional journey and community contributions
+          </p>
+        </div>
 
-        <div className="max-w-4xl mx-auto space-y-8">
-          {experiences.map((exp, index) => {
-            const Icon = exp.icon;
-            const colorClass = exp.color === 'primary' ? 'text-primary' : 'text-secondary';
-            const bgClass = exp.color === 'primary' ? 'bg-primary/10' : 'bg-secondary/10';
+        {/* Timeline */}
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-primary to-accent hidden md:block transform md:-translate-x-1/2" />
 
-            return (
-              <Card
-                key={index}
-                className="p-6 md:p-8 bg-gradient-card border-border hover:border-primary transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="flex flex-col md:flex-row gap-6">
-                  <div className={`p-4 ${bgClass} rounded-lg self-start`}>
-                    <Icon className={`w-8 h-8 ${colorClass}`} />
-                  </div>
+            <div className="space-y-12">
+              {experiences.map((exp, index) => {
+                const Icon = exp.icon;
+                const isEven = index % 2 === 0;
 
-                  <div className="flex-1">
-                    <div className="mb-4">
-                      <h3 className="text-2xl font-bold mb-2">{exp.title}</h3>
-                      <p className={`text-lg ${colorClass} font-semibold mb-1`}>
-                        {exp.organization}
-                      </p>
-                      <p className="text-sm text-muted-foreground font-mono">{exp.period}</p>
+                return (
+                  <div
+                    key={index}
+                    className={`relative flex items-center ${
+                      isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+                    }`}
+                  >
+                    {/* Timeline dot */}
+                    <div className="hidden md:block absolute left-1/2 -translate-x-1/2 z-10">
+                      <div className="p-2 bg-accent/10 rounded-full border-2 border-accent/30 hover:border-accent/50 transition-all duration-300">
+                        <Icon className="w-5 h-5 text-accent" />
+                      </div>
                     </div>
 
-                    <p className="text-muted-foreground mb-4 leading-relaxed">
-                      {exp.description}
-                    </p>
+                    {/* Content Card */}
+                    <div className={`w-full md:w-[calc(50%-3rem)] ${isEven ? 'md:pr-12' : 'md:pl-12'}`}>
+                      <Card
+                        className="p-6 md:p-8 bg-card/60 backdrop-blur-sm border border-border hover:border-accent/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg group"
+                      >
+                        {/* Mobile icon */}
+                        <div className="md:hidden flex items-center gap-4 mb-4">
+                          <div className="p-3 bg-accent/10 rounded-xl border border-accent/20">
+                            <Icon className="w-6 h-6 text-accent" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-mono text-accent font-semibold">{exp.period}</p>
+                          </div>
+                        </div>
 
-                    <div className="space-y-2">
-                      <p className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                        Key Achievements:
-                      </p>
-                      <ul className="space-y-2">
-                        {exp.achievements.map((achievement, achIndex) => (
-                          <li key={achIndex} className="flex items-start gap-2">
-                            <span className={`${colorClass} mt-1`}>▸</span>
-                            <span className="text-muted-foreground">{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
+                        <div className="space-y-4">
+                          <div>
+                            <div className="flex items-start justify-between gap-4 mb-2">
+                              <h3 className="text-2xl font-bold group-hover:text-accent transition-colors">
+                                {exp.title}
+                              </h3>
+                              <div className="hidden md:block">
+                                <p className="text-sm font-mono text-accent font-semibold">{exp.period}</p>
+                              </div>
+                            </div>
+                            <p className="text-lg text-accent font-semibold mb-1">
+                              {exp.organization}
+                            </p>
+                            <div className="flex items-center gap-2 text-sm text-foreground/60">
+                              <Calendar className="w-4 h-4" />
+                              <span>{exp.location}</span>
+                            </div>
+                          </div>
+
+                          <p className="text-foreground/70 leading-relaxed">
+                            {exp.description}
+                          </p>
+
+                          <div className="space-y-2 pt-4 border-t border-border/50">
+                            <p className="font-semibold text-sm uppercase tracking-wider text-foreground/60">
+                              Key Achievements:
+                            </p>
+                            <ul className="space-y-2">
+                              {exp.achievements.map((achievement, achIndex) => (
+                                <li key={achIndex} className="flex items-start gap-2">
+                                  <span className="text-accent mt-1.5 font-bold">▸</span>
+                                  <span className="text-foreground/70">{achievement}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </Card>
                     </div>
                   </div>
-                </div>
-              </Card>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

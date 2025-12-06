@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
-import DynamicBackground from '@/components/ui/DynamicBackground';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin, Trophy, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Calendar, MapPin, Trophy, Users, RotateCcw, Award } from 'lucide-react';
 
 interface Event {
   id: number;
@@ -19,22 +19,19 @@ interface Event {
 
 const EventsSection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
 
   const events: Event[] = [
     {
       id: 101,
       title: 'IEEEXtreme 19.0',
-      date: ' 2025',
+      date: '2025',
       location: 'Global (Online)',
       type: 'hackathon',
-      description: '24 hours of non-stop competitive programming at IEEEXtreme! Solving algorithms, debugging at 3 AM, and pushing our limits. Two years of intense coding challenges!',
+      description: '24 hours of non-stop competitive programming at IEEEXtreme! Solving algorithms, debugging at 3 AM, and pushing our limits.',
       achievement: 'Participant and completed all challenges',
-      images: [
-        'public/images/extreeme.jpg',
-        
-      ],
+      images: ['public/images/extreeme.jpg'],
     },
-
     {
       id: 1,
       title: 'IASTAM 5.0',
@@ -43,24 +40,17 @@ const EventsSection = () => {
       type: 'conference',
       description: 'I won first place in the Tech Challenge at IASTAM 5 (2025), leading event for industrial technology. My project DefenSys was recognized for innovative AI-powered application security.',
       achievement: 'First Place in Tech Challenge',
-      images: [
-        'public/images/iastam1.jpeg',
-        'public/images/iastam2.jpeg',
-        'public/images/iastam3.jpeg',
-      ],
+      images: ['public/images/iastam1.jpeg', 'public/images/iastam2.jpeg', 'public/images/iastam3.jpeg'],
     },
     {
       id: 8,
       title: 'IAC:IEEE IAS 60TH Anniversary',
-      date: 'avril 2025',
+      date: 'Avril 2025',
       location: 'Tunis, Tunisia',
       type: 'conference',
       description: 'IAC:IEEE IAS 60TH Anniversary, a powerful conversation exploring industrial journey, innovations driving change, and the road ahead.',
       achievement: 'Celebration of innovation, teamwork and collaboration',
-      images: [
-        'public/images/iac1.jpeg',
-        'public/images/iac2.jpg',
-      ],
+      images: ['public/images/iac1.jpeg', 'public/images/iac2.jpg'],
     },
     {
       id: 2,
@@ -68,13 +58,9 @@ const EventsSection = () => {
       date: 'Avril 2025',
       location: 'EPI Sousse, Tunisia',
       type: 'hackathon',
-      description: 'Raksha Pentest is an intense 26-hour cybersecurity hackathon focused on penetration testing and ethical hacking. Participants tackle real-world security challenges and defend systems.',
+      description: 'Raksha Pentest is an intense 26-hour cybersecurity hackathon focused on penetration testing and ethical hacking.',
       achievement: '4th Place in Pentest',
-      images: [
-        'public/images/raksha1.jpeg',
-        'public/images/raksha2.jpeg',
-        'public/images/raksha3.jpeg',
-      ],
+      images: ['public/images/raksha1.jpeg', 'public/images/raksha2.jpeg', 'public/images/raksha3.jpeg'],
     },
     {
       id: 3,
@@ -82,13 +68,9 @@ const EventsSection = () => {
       date: 'Fevrier 2025',
       location: 'ISITCOM, Sousse, Tunisia',
       type: 'hackathon',
-      description: 'Secured 3rd place in RedRoom Hackathon, a challenging cybersecurity competition focused on CTFs and penetration testing, demonstrating practical offensive and defensive skills.',
+      description: 'Secured 3rd place in RedRoom Hackathon, a challenging cybersecurity competition focused on CTFs and penetration testing.',
       achievement: '3rd Place in CTF, ARG, Pentest',
-      images: [
-        'public/images/redroom1.jpeg',
-        'public/images/redroom2.jpeg',
-        'public/images/redroom3.jpeg', 
-      ],
+      images: ['public/images/redroom1.jpeg', 'public/images/redroom2.jpeg', 'public/images/redroom3.jpeg'],
     },
     {
       id: 4,
@@ -98,21 +80,18 @@ const EventsSection = () => {
       type: 'hackathon',
       description: 'Secured 4th place with team in Cyberbenders hackathon, a challenging cybersecurity competition focused on CTFs and AI challenges.',
       achievement: '4th Place in CTF, AI',
-      images: [
-      ],
+      images: [],
     },
-    
-    
   ];
 
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'hackathon':
-        return 'bg-primary text-primary-foreground';
-      case 'conference':
-        return 'bg-secondary text-secondary-foreground';
-      case 'social':
         return 'bg-accent text-accent-foreground';
+      case 'conference':
+        return 'bg-primary text-primary-foreground';
+      case 'social':
+        return 'bg-secondary text-secondary-foreground';
       default:
         return 'bg-muted text-muted-foreground';
     }
@@ -129,101 +108,210 @@ const EventsSection = () => {
     }
   };
 
+  const handleCardClick = (id: number) => {
+    setFlippedCards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <div className="relative">
-      <DynamicBackground />
       <Navigation />
       <main className="relative z-10">
-        <section id="events" className="py-20 px-4">
+        <section id="events" className="py-32 px-4 bg-background">
           <div className="container mx-auto max-w-6xl">
             {/* Section Header */}
-            <div className="text-center space-y-4 mb-16 animate-fade-in">
-              <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-primary">
-                Events & Experiences
+            <div className="text-center space-y-4 mb-20">
+              <div className="inline-block w-16 h-0.5 bg-accent mb-6" />
+              <h2 className="text-4xl md:text-6xl font-bold">
+                Events & <span className="text-accent">Experiences</span>
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
                 Hackathons, conferences, and networking events that shaped my journey
               </p>
             </div>
 
-            {/* Events Grid */}
-            <div className="space-y-8">
-              {events.map((event, index) => (
-                <Card
-                  key={event.id}
-                  className="group overflow-hidden border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow-primary animate-slide-up"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <CardContent className="p-0">
-                    <div className="grid md:grid-cols-2 gap-0">
-                      {/* Event Details */}
-                      <div className="p-6 md:p-8 flex flex-col justify-center space-y-4 bg-card">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <Badge className={`${getTypeColor(event.type)} flex items-center gap-1`}>
-                            {getTypeIcon(event.type)}
-                            <span className="capitalize">{event.type}</span>
-                          </Badge>
-                          {event.achievement && (
-                            <Badge variant="outline" className="border-secondary text-secondary">
-                              {event.achievement}
-                            </Badge>
-                          )}
-                        </div>
+            {/* Events Grid - Fixed Layout */}
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+              {events.map((event, index) => {
+                const isFlipped = flippedCards.has(event.id);
 
-                        <h3 className="text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
-                          {event.title}
-                        </h3>
+                return (
+                  <div
+                    key={event.id}
+                    className="flip-card-container flying-card h-[500px]"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div
+                      className={`flip-card ${isFlipped ? 'flipped' : ''}`}
+                      onClick={() => handleCardClick(event.id)}
+                    >
+                      {/* Front of Card */}
+                      <div className="flip-card-front">
+                        <Card className="h-full overflow-hidden border border-border hover:border-accent/50 transition-all duration-300 shadow-lg hover:shadow-xl">
+                          <CardContent className="p-0 h-full flex flex-col">
+                            {/* Image Section */}
+                            {event.images.length > 0 && (
+                              <div className="relative h-48 bg-muted/30 overflow-hidden">
+                                <div className="grid grid-cols-2 gap-1 h-full p-2">
+                                  {event.images.slice(0, 4).map((image, imgIndex) => (
+                                    <div
+                                      key={imgIndex}
+                                      className={`relative overflow-hidden rounded ${
+                                        event.images.length === 1 ? 'col-span-2' : ''
+                                      } ${event.images.length === 3 && imgIndex === 0 ? 'row-span-2' : ''}`}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(image);
+                                      }}
+                                    >
+                                      <img
+                                        src={image}
+                                        alt={`${event.title} - ${imgIndex + 1}`}
+                                        className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
 
-                        <div className="space-y-2 text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-primary" />
-                            <span>{event.date}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-secondary" />
-                            <span>{event.location}</span>
-                          </div>
-                        </div>
+                            {/* Content Section */}
+                            <div className="p-6 flex flex-col flex-grow">
+                              <div className="flex items-center gap-2 flex-wrap mb-3">
+                                <Badge className={`${getTypeColor(event.type)} flex items-center gap-1 text-xs`}>
+                                  {getTypeIcon(event.type)}
+                                  <span className="capitalize">{event.type}</span>
+                                </Badge>
+                                {event.achievement && (
+                                  <Badge variant="outline" className="border-accent text-accent text-xs">
+                                    {event.achievement}
+                                  </Badge>
+                                )}
+                              </div>
 
-                        <p className="text-foreground/80 leading-relaxed">{event.description}</p>
+                              <h3 className="text-xl font-bold text-foreground mb-3 line-clamp-2">
+                                {event.title}
+                              </h3>
+
+                              <div className="space-y-2 text-foreground/70 mb-3 text-sm">
+                                <div className="flex items-center gap-2">
+                                  <Calendar className="w-4 h-4 text-accent" />
+                                  <span>{event.date}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <MapPin className="w-4 h-4 text-accent" />
+                                  <span>{event.location}</span>
+                                </div>
+                              </div>
+
+                              <p className="text-foreground/80 leading-relaxed line-clamp-3 text-sm mb-4 flex-grow">
+                                {event.description}
+                              </p>
+
+                              {/* Flip hint */}
+                              <div className="text-center pt-3 border-t border-border/50 mt-auto">
+                                <p className="text-xs text-foreground/50 flex items-center justify-center gap-1.5">
+                                  <RotateCcw className="w-3 h-3" />
+                                  Click for details
+                                </p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
                       </div>
 
-                      {/* Image Gallery */}
-                      <div className="relative">
-                        <div
-                          className={`grid gap-2 p-4 ${
-                            event.images.length === 1
-                              ? 'grid-cols-1'
-                              : event.images.length === 2
-                              ? 'grid-cols-2'
-                              : event.images.length === 3
-                              ? 'grid-cols-2 grid-rows-2'
-                              : 'grid-cols-2 grid-rows-2'
-                          }`}
-                        >
-                          {event.images.map((image, imgIndex) => (
-                            <div
-                              key={imgIndex}
-                              className={`relative overflow-hidden rounded-lg cursor-pointer group/img ${
-                                event.images.length === 3 && imgIndex === 0 ? 'row-span-2' : ''
-                              } ${event.images.length >= 4 && imgIndex === 0 ? 'col-span-2' : ''}`}
-                              onClick={() => setSelectedImage(image)}
-                            >
-                              <img
-                                src={image}
-                                alt={`${event.title} - Image ${imgIndex + 1}`}
-                                className="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-110"
-                                style={{ minHeight: event.images.length === 1 ? '100%' : '150px' }}
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300" />
+                      {/* Back of Card */}
+                      <div className="flip-card-back">
+                        <Card className="h-full overflow-hidden border-2 border-accent/20 bg-gradient-to-br from-accent/5 via-primary/5 to-accent/5 backdrop-blur-sm shadow-xl">
+                          <CardContent className="p-6 h-full flex flex-col overflow-y-auto">
+                            {/* Header */}
+                            <div className="flex items-start justify-between mb-5 flex-shrink-0">
+                              <div className="flex-1">
+                                <h3 className="text-xl font-bold text-accent mb-1">
+                                  {event.title}
+                                </h3>
+                                <p className="text-xs text-foreground/60">Event Details</p>
+                              </div>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCardClick(event.id);
+                                }}
+                                className="h-7 w-7 hover:bg-accent/10 flex-shrink-0"
+                              >
+                                <RotateCcw className="w-3.5 h-3.5 text-accent" />
+                              </Button>
                             </div>
-                          ))}
-                        </div>
+
+                            {/* Achievement Highlight */}
+                            {event.achievement && (
+                              <div className="mb-5 p-3 rounded-lg bg-accent/10 border border-accent/20 flex-shrink-0">
+                                <div className="flex items-center gap-2 mb-1.5">
+                                  <Award className="w-4 h-4 text-accent" />
+                                  <p className="text-xs font-semibold text-accent">Achievement</p>
+                                </div>
+                                <p className="text-sm font-bold text-foreground">
+                                  {event.achievement}
+                                </p>
+                              </div>
+                            )}
+
+                            {/* Event Info */}
+                            <div className="mb-5 space-y-3 flex-shrink-0">
+                              <div className="flex items-center gap-3 p-3 rounded-lg bg-card/50 border border-border/50">
+                                <Calendar className="w-4 h-4 text-accent flex-shrink-0" />
+                                <div>
+                                  <p className="text-xs text-foreground/60 mb-0.5">Date</p>
+                                  <p className="text-sm font-semibold text-foreground">{event.date}</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3 p-3 rounded-lg bg-card/50 border border-border/50">
+                                <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
+                                <div>
+                                  <p className="text-xs text-foreground/60 mb-0.5">Location</p>
+                                  <p className="text-sm font-semibold text-foreground">{event.location}</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3 p-3 rounded-lg bg-card/50 border border-border/50">
+                                <Badge className={`${getTypeColor(event.type)} flex items-center gap-1 text-xs`}>
+                                  {getTypeIcon(event.type)}
+                                  <span className="capitalize">{event.type}</span>
+                                </Badge>
+                              </div>
+                            </div>
+
+                            {/* Full Description */}
+                            <div className="mb-5 flex-1">
+                              <p className="text-xs font-semibold text-foreground mb-2">About This Event</p>
+                              <p className="text-sm text-foreground/80 leading-relaxed">
+                                {event.description}
+                              </p>
+                            </div>
+
+                            {/* Image count */}
+                            {event.images.length > 0 && (
+                              <div className="pt-3 border-t border-border/50 flex-shrink-0">
+                                <p className="text-xs text-foreground/60">
+                                  {event.images.length} photo{event.images.length > 1 ? 's' : ''} available - click images on front to view
+                                </p>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

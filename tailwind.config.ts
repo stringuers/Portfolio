@@ -57,8 +57,9 @@ export default {
         'glow-secondary': 'var(--glow-secondary)',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['Inter', 'system-ui', 'sans-serif'], // Bold headers
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -110,6 +111,18 @@ export default {
             textShadow: "0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary)), 0 0 40px hsl(var(--primary))",
           },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "spin": {
+          "from": { transform: "rotate(0deg)" },
+          "to": { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +130,9 @@ export default {
         "fade-in": "fade-in 0.6s ease-out",
         "slide-up": "slide-up 0.6s ease-out",
         "glow": "glow 2s ease-in-out infinite alternate",
+        "float": "float 6s ease-in-out infinite",
+        "gradient-shift": "gradient-shift 8s ease infinite",
+        "spin": "spin 20s linear infinite",
       },
     },
   },
