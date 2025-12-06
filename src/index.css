@@ -59,6 +59,46 @@
     --glow-secondary: 0 0 35px hsl(180 6% 63% / 0.3);
     --glow-accent: 0 0 45px hsl(200 80% 55% / 0.5);
   }
+
+  /* Light Mode */
+  :root:not(.dark) {
+    --background: 210 20% 98%; /* #F8F9FA - off-white */
+    --background-2: 210 15% 95%;
+    --foreground: 210 29% 20%; /* #2C3E50 - darker for better contrast */
+    --card: 210 20% 100%; /* Pure white cards */
+    --card-foreground: 210 29% 20%; /* Dark text on white */
+    --popover: 210 20% 100%;
+    --popover-foreground: 210 29% 20%;
+    --muted: 210 10% 92%; /* Slightly darker for subtle contrast */
+    --muted-foreground: 210 20% 32%; /* Much darker for readability - WCAG AA compliant */
+    --border: 210 15% 75%; /* More visible borders */
+    --input: 210 15% 75%;
+    --primary: 210 29% 24%; /* Keep primary dark for contrast */
+    --primary-foreground: 210 20% 98%; /* Light text on dark primary */
+    --secondary: 180 8% 45%; /* Darker secondary for better contrast in light mode */
+    --secondary-foreground: 210 20% 98%; /* Light text on secondary */
+    --accent: 200 75% 50%; /* Slightly darker accent for better contrast */
+    --accent-foreground: 210 20% 98%; /* Light text on accent */
+    --text-secondary: 210 20% 38%; /* Darker secondary text for readability */
+    
+    /* Light mode gradients */
+    --gradient-card: linear-gradient(180deg, hsl(210 20% 100%), hsl(210 15% 97%));
+  }
+
+  /* Dark Mode (default) */
+  .dark {
+    --background: 210 30% 12%;
+    --background-2: 210 28% 16%;
+    --foreground: 210 20% 98%;
+    --card: 210 28% 18%;
+    --card-foreground: 210 20% 98%;
+    --popover: 210 28% 18%;
+    --popover-foreground: 210 20% 98%;
+    --muted: 210 15% 25%;
+    --muted-foreground: 180 6% 63%;
+    --border: 210 20% 28%;
+    --input: 210 20% 28%;
+  }
 }
 
 @layer base {
@@ -422,4 +462,15 @@ button:active, a:active, [role="button"]:active {
 .section-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Light mode text contrast improvements */
+@layer utilities {
+  .text-readable {
+    @apply text-foreground/90 dark:text-foreground/80;
+  }
+  
+  .text-readable-muted {
+    @apply text-foreground/70 dark:text-muted-foreground;
+  }
 }

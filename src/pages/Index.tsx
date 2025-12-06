@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -14,34 +15,46 @@ import BackgroundParticles from '@/components/ui/BackgroundParticles';
 import Background3DPhoto from '@/components/ui/Background3DPhoto';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 import QuickNav from '@/components/ui/QuickNav';
+import ScrollToTop from '@/components/ui/ScrollToTop';
+import Testimonials from '@/components/Testimonials';
+import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import AccessibilityHelper from '@/components/ui/AccessibilityHelper';
+import { SectionSkeleton } from '@/components/ui/LoadingSkeleton';
 
 const Index = () => {
   return (
-    <div className="relative w-full min-h-screen bg-premium">
-      <CustomCursor />
-      <Background3DPhoto 
-        imageUrl="/images/hero-bg.jpg" // You can change this to your photo path
-        intensity={25} // Adjust parallax intensity (0-50)
-        opacity={0.2} // Adjust photo opacity (0-1)
-        blur={3} // Adjust blur amount (0-10)
-      />
-      <BackgroundParticles />
-      <ScrollProgress />
-      <QuickNav />
-      <Navigation />
-      <main className="relative z-10 w-full">
-        <Hero />
-        <About />
-        <InteractiveShowcase />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Learning />
-        <EventsSection />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <ErrorBoundary>
+      <AccessibilityHelper />
+      <div className="relative w-full min-h-screen bg-premium">
+        <CustomCursor />
+        <Background3DPhoto 
+          imageUrl="/images/hero-bg.jpg"
+          intensity={25}
+          opacity={0.2}
+          blur={3}
+        />
+        <BackgroundParticles />
+        <ScrollProgress />
+        <QuickNav />
+        <Navigation />
+        <main id="main-content" className="relative z-10 w-full" role="main">
+          <Suspense fallback={<SectionSkeleton />}>
+            <Hero />
+            <About />
+            <InteractiveShowcase />
+            <Skills />
+            <Projects />
+            <Experience />
+            <Learning />
+            <EventsSection />
+            <Testimonials />
+            <Contact />
+          </Suspense>
+        </main>
+        <Footer />
+        <ScrollToTop />
+      </div>
+    </ErrorBoundary>
   );
 };
 

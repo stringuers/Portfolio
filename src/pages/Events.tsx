@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -121,11 +119,9 @@ const EventsSection = () => {
   };
 
   return (
-    <div className="relative">
-      <Navigation />
-      <main className="relative z-10">
-        <section id="events" className="py-32 px-4 bg-background">
-          <div className="container mx-auto max-w-6xl">
+    <>
+    <section id="events" className="relative z-10 py-32 bg-background scroll-mt-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section Header */}
             <div className="text-center space-y-4 mb-20">
               <div className="inline-block w-16 h-0.5 bg-accent mb-6" />
@@ -314,9 +310,7 @@ const EventsSection = () => {
               })}
             </div>
           </div>
-        </section>
-      </main>
-      <Footer />
+      </section>
 
       {/* Image Lightbox */}
       {selectedImage && (
@@ -348,7 +342,7 @@ const EventsSection = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

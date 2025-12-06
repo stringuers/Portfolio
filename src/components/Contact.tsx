@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Github, Linkedin, Mail, Send, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, Send, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
@@ -14,30 +14,111 @@ const Contact = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateField = (name: string, value: string) => {
+    const newErrors: Record<string, string> = {};
+
+    switch (name) {
+      case 'name':
+        if (!value.trim()) {
+          newErrors.name = 'Name is required';
+        } else if (value.trim().length < 2) {
+          newErrors.name = 'Name must be at least 2 characters';
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          newErrors.email = 'Email is required';
+        } else if (!validateEmail(value)) {
+          newErrors.email = 'Please enter a valid email address';
+        }
+        break;
+      case 'message':
+        if (!value.trim()) {
+          newErrors.message = 'Message is required';
+        } else if (value.trim().length < 10) {
+          newErrors.message = 'Message must be at least 10 characters';
+        }
+        break;
+    }
+
+    setErrors((prev) => ({ ...prev, ...newErrors }));
+    return !newErrors[name];
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    validateField(name, value);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    if (!formData.name || !formData.email || !formData.message) {
+    // Mark all fields as touched
+    setTouched({ name: true, email: true, message: true });
+
+    // Validate all fields
+    const isNameValid = validateField('name', formData.name);
+    const isEmailValid = validateField('email', formData.email);
+    const isMessageValid = validateField('message', formData.message);
+
+    if (!isNameValid || !isEmailValid || !isMessageValid) {
       toast({
-        title: 'Error',
-        description: 'Please fill in all fields',
+        title: 'Validation Error',
+        description: 'Please fix the errors in the form',
         variant: 'destructive',
       });
       setIsSubmitting(false);
       return;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate API call
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // In production, you would send this to your backend/email service
+      // Example: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });
 
-    toast({
-      title: 'Message Sent!',
-      description: "Thanks for reaching out! I'll get back to you soon.",
-    });
+      toast({
+        title: 'Message Sent!',
+        description: "Thanks for reaching out! I'll get back to you soon.",
+      });
 
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+      setFormData({ name: '', email: '', message: '' });
+      setTouched({});
+      setErrors({});
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to send message. Please try again later.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -88,47 +169,86 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
-                  Name
+                  Name <span className="text-destructive">*</span>
                 </label>
                 <Input
                   id="name"
+                  name="name"
                   type="text"
                   placeholder="Your name"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-background/50 border-border focus:border-accent transition-colors"
-                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`bg-background/50 border-border focus:border-accent transition-colors ${
+                    touched.name && errors.name ? 'border-destructive' : ''
+                  }`}
+                  aria-invalid={touched.name && !!errors.name}
+                  aria-describedby={touched.name && errors.name ? 'name-error' : undefined}
                 />
+                {touched.name && errors.name && (
+                  <p id="name-error" className="mt-1 text-sm text-destructive flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.name}
+                  </p>
+                )}
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
-                  Email
+                  Email <span className="text-destructive">*</span>
                 </label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="your.email@example.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-background/50 border-border focus:border-accent transition-colors"
-                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`bg-background/50 border-border focus:border-accent transition-colors ${
+                    touched.email && errors.email ? 'border-destructive' : ''
+                  }`}
+                  aria-invalid={touched.email && !!errors.email}
+                  aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
                 />
+                {touched.email && errors.email && (
+                  <p id="email-error" className="mt-1 text-sm text-destructive flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.email}
+                  </p>
+                )}
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
-                  Message
+                  Message <span className="text-destructive">*</span>
                 </label>
                 <Textarea
                   id="message"
+                  name="message"
                   placeholder="Tell me about your project or idea..."
                   rows={6}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-background/50 border-border focus:border-accent transition-colors resize-none"
-                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`bg-background/50 border-border focus:border-accent transition-colors resize-none ${
+                    touched.message && errors.message ? 'border-destructive' : ''
+                  }`}
+                  aria-invalid={touched.message && !!errors.message}
+                  aria-describedby={touched.message && errors.message ? 'message-error' : undefined}
                 />
+                {touched.message && errors.message && (
+                  <p id="message-error" className="mt-1 text-sm text-destructive flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.message}
+                  </p>
+                )}
+                {!errors.message && formData.message.length > 0 && (
+                  <p className="mt-1 text-xs text-foreground/60 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-accent" />
+                    {formData.message.length} characters
+                  </p>
+                )}
               </div>
 
               <Button 

@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import CVDropdown from '@/components/CVDropdown';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -103,7 +104,8 @@ const Navigation = () => {
                 )}
               </button>
             ))}
-            <div className="ml-4 pl-4 border-l border-border">
+            <div className="ml-4 pl-4 border-l border-border flex items-center gap-3">
+              <ThemeToggle />
               <CVDropdown />
             </div>
           </div>
@@ -139,7 +141,11 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
-            <div className="px-4 pt-2">
+            <div className="px-4 pt-2 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-foreground/70">Theme</span>
+                <ThemeToggle />
+              </div>
               <CVDropdown />
             </div>
           </div>

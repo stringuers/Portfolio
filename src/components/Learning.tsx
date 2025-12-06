@@ -63,7 +63,7 @@ const Learning = () => {
                 return (
                   <Card
                     key={index}
-                    className="p-6 bg-gradient-card border-border hover:border-primary transition-all duration-300 ml-0 md:ml-16 relative animate-fade-in"
+                    className="p-6 bg-card dark:bg-gradient-card border-border hover:border-primary/50 dark:hover:border-primary transition-all duration-300 ml-0 md:ml-16 relative animate-fade-in shadow-sm dark:shadow-none"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     {/* Timeline dot */}
@@ -94,14 +94,14 @@ const Learning = () => {
 
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-xl font-bold">{item.title}</h3>
+                          <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
                           <span
-                            className={`px-2 py-1 text-xs rounded-full ${
+                            className={`px-3 py-1 text-xs font-semibold rounded-full border ${
                               isCompleted
-                                ? 'bg-primary/10 text-primary'
+                                ? 'bg-primary/15 text-primary border-primary/30 dark:bg-primary/10 dark:border-primary/20'
                                 : isInProgress
-                                ? 'bg-secondary/10 text-secondary'
-                                : 'bg-muted text-muted-foreground'
+                                ? 'bg-accent/15 text-accent border-accent/30 dark:bg-secondary/10 dark:border-secondary/20 dark:text-secondary'
+                                : 'bg-muted/50 text-muted-foreground border-border dark:bg-muted dark:text-muted-foreground'
                             }`}
                           >
                             {item.status === 'completed'
@@ -111,7 +111,7 @@ const Learning = () => {
                               : 'Planned'}
                           </span>
                         </div>
-                        <p className="text-muted-foreground">{item.description}</p>
+                        <p className="text-foreground/70 dark:text-muted-foreground leading-relaxed">{item.description}</p>
                       </div>
                     </div>
                   </Card>
