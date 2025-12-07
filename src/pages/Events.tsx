@@ -18,6 +18,17 @@ interface Event {
 const EventsSection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+
+  // Helper function to get image path with base URL
+  const getImagePath = (imagePath: string) => {
+    const base = import.meta.env.BASE_URL || '/';
+    return `${base}${imagePath.startsWith('/') ? imagePath.slice(1) : imagePath}`;
+  };
+
+  const handleImageError = (imagePath: string) => {
+    setImageErrors((prev) => new Set(prev).add(imagePath));
+  };
 
   const events: Event[] = [
     {
@@ -28,7 +39,7 @@ const EventsSection = () => {
       type: 'hackathon',
       description: '24 hours of non-stop competitive programming at IEEEXtreme! Solving algorithms, debugging at 3 AM, and pushing our limits.',
       achievement: 'Participant and completed all challenges',
-      images: ['public/images/extreeme.jpg'],
+      images: ['images/extreeme.jpg'],
     },
     {
       id: 1,
@@ -38,7 +49,7 @@ const EventsSection = () => {
       type: 'conference',
       description: 'I won first place in the Tech Challenge at IASTAM 5 (2025), leading event for industrial technology. My project DefenSys was recognized for innovative AI-powered application security.',
       achievement: 'First Place in Tech Challenge',
-      images: ['public/images/iastam1.jpeg', 'public/images/iastam2.jpeg', 'public/images/iastam3.jpeg'],
+      images: ['images/iastam1.jpeg', 'images/iastam2.jpeg', 'images/iastam3.jpeg'],
     },
     {
       id: 8,
@@ -48,7 +59,7 @@ const EventsSection = () => {
       type: 'conference',
       description: 'IAC:IEEE IAS 60TH Anniversary, a powerful conversation exploring industrial journey, innovations driving change, and the road ahead.',
       achievement: 'Celebration of innovation, teamwork and collaboration',
-      images: ['public/images/iac1.jpeg', 'public/images/iac2.jpg'],
+      images: ['images/iac1.jpeg', 'images/iac2.jpg'],
     },
     {
       id: 2,
@@ -58,7 +69,7 @@ const EventsSection = () => {
       type: 'hackathon',
       description: 'Raksha Pentest is an intense 26-hour cybersecurity hackathon focused on penetration testing and ethical hacking.',
       achievement: '4th Place in Pentest',
-      images: ['public/images/raksha1.jpeg', 'public/images/raksha2.jpeg', 'public/images/raksha3.jpeg'],
+      images: ['images/raksha1.jpeg', 'images/raksha2.jpeg', 'images/raksha3.jpeg'],
     },
     {
       id: 3,
@@ -68,7 +79,7 @@ const EventsSection = () => {
       type: 'hackathon',
       description: 'Secured 3rd place in RedRoom Hackathon, a challenging cybersecurity competition focused on CTFs and penetration testing.',
       achievement: '3rd Place in CTF, ARG, Pentest',
-      images: ['public/images/redroom1.jpeg', 'public/images/redroom2.jpeg', 'public/images/redroom3.jpeg'],
+      images: ['images/redroom1.jpeg', 'images/redroom3.jpeg'],
     },
     {
       id: 4,
@@ -156,24 +167,37 @@ const EventsSection = () => {
                             {event.images.length > 0 && (
                               <div className="relative h-48 bg-muted/30 overflow-hidden">
                                 <div className="grid grid-cols-2 gap-1 h-full p-2">
-                                  {event.images.slice(0, 4).map((image, imgIndex) => (
-                                    <div
-                                      key={imgIndex}
-                                      className={`relative overflow-hidden rounded ${
-                                        event.images.length === 1 ? 'col-span-2' : ''
-                                      } ${event.images.length === 3 && imgIndex === 0 ? 'row-span-2' : ''}`}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        setSelectedImage(image);
-                                      }}
-                                    >
-                                      <img
-                                        src={image}
-                                        alt={`${event.title} - ${imgIndex + 1}`}
-                                        className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
-                                      />
-                                    </div>
-                                  ))}
+                                  {event.images.slice(0, 4).map((image, imgIndex) => {
+                                    const imagePath = getImagePath(image);
+                                    const hasError = imageErrors.has(imagePath);
+                                    
+                                    return (
+                                      <div
+                                        key={imgIndex}
+                                        className={`relative overflow-hidden rounded ${
+                                          event.images.length === 1 ? 'col-span-2' : ''
+                                        } ${event.images.length === 3 && imgIndex === 0 ? 'row-span-2' : ''}`}
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setSelectedImage(imagePath);
+                                        }}
+                                      >
+                                        {!hasError ? (
+                                          <img
+                                            src={imagePath}
+                                            alt={`${event.title} - ${imgIndex + 1}`}
+                                            className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+                                            onError={() => handleImageError(imagePath)}
+                                            loading="lazy"
+                                          />
+                                        ) : (
+                                          <div className="w-full h-full flex items-center justify-center bg-muted/50 text-muted-foreground text-xs">
+                                            Image not found
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
                                 </div>
                               </div>
                             )}
@@ -323,6 +347,10 @@ const EventsSection = () => {
               src={selectedImage}
               alt="Full size"
               className="w-full h-full object-contain rounded-lg shadow-2xl"
+              onError={(e) => {
+                console.error('Failed to load image:', selectedImage);
+                e.currentTarget.style.display = 'none';
+              }}
             />
             <button
               className="absolute top-4 right-4 bg-background/80 hover:bg-background text-foreground rounded-full p-3 transition-all duration-200 hover:scale-110"
